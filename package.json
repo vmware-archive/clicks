@@ -1,0 +1,40 @@
+{
+	"name": "clicks",
+	"version": "0.0.0-next",
+	"description": "Browser click streams",
+	"keywords": ["click", "steam", "clickstream"],
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "http://opensource.org/licenses/MIT"
+		}
+	],
+	"repositories": [
+		{
+			"type": "git",
+			"url": "https://github.com/s2js/clicks"
+		}
+	],
+	"bugs": "https://github.com/s2js/clicks/issues",
+	"maintainers": [
+		{
+			"name": "Scott Andrews",
+			"email": "andrewss@vmware.com",
+			"web": "http://twitter.com/scothis"
+		}
+	],
+	"dependencies": {},
+	"devDependencies": {
+		"curl": "https://github.com/cujojs/curl/tarball/0.7.2",
+		"poly": "https://github.com/cujojs/poly/tarball/0.5.1",
+		"buster": "",
+		"grunt": "",
+		"grunt-buster": "",
+		"json5": "0.1.0"
+	},
+	"main": "./clicks",
+	"scripts": {
+		"test": "grunt --no-color",
+		"start": "buster static"
+	}
+}
