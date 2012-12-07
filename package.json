@@ -1,8 +1,8 @@
 {
 	"name": "clicks",
-	"version": "0.0.0-next",
+	"version": "0.1.0",
 	"description": "Browser click streams",
-	"keywords": ["click", "steam", "clickstream"],
+	"keywords": ["click", "steam", "clickstream", "s2js", "spring", "springsource"],
 	"licenses": [
 		{
 			"type": "MIT",
