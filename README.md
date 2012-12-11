@@ -135,7 +135,7 @@ Change Log
 ----------
 
 .next
-- nothing yet
+- Bower installable, with dependencies
 
 0.1.0
 - first release, everything is new
