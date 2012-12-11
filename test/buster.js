@@ -29,6 +29,7 @@ config['clicks:browser'] = {
 	resources: [
 		// '**' // ** is majorly broken in buster right now
 		'*.js',
+		'*.json',
 		'events/**/*.js',
 		'streams/**/*.js',
 		'transforms/**/*.js',
