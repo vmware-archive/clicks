@@ -46,7 +46,7 @@ define(function (require) {
 		this.ctrlKey = '';
 		this.shiftKey = '';
 	}
-	TouchEvent.prototype = dom3.properties.UIEvent;
+	TouchEvent.prototype = dom3.properties.userInterface;
 	prop.touch = new TouchEvent();
 
 	function GestureEvent() {
@@ -57,7 +57,7 @@ define(function (require) {
 		this.scale = '';
 		this.shiftKey = '';
 	}
-	GestureEvent.prototype = dom3.properties.UIEvent;
+	GestureEvent.prototype = dom3.properties.userInterface;
 	prop.gesture = new GestureEvent();
 
 	events.categories = cat = {

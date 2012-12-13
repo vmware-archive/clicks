@@ -43,7 +43,7 @@ define(function (require) {
 		this.url = '';
 		this.storageArea = 'storage';
 	}
-	StorageEvent.prototype = dom3.properties.Event;
+	StorageEvent.prototype = dom3.properties.event;
 	prop.storage = new StorageEvent();
 
 	events.categories = cat = {
