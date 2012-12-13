@@ -33,10 +33,8 @@ config['clicks:browser'] = {
 		'events/**/*.js',
 		'streams/**/*.js',
 		'transforms/**/*.js',
-		'node_modules/curl/src/curl/*.js',
-		'node_modules/curl/src/curl/*/*.js',
-		'node_modules/poly/*.js',
-		'node_modules/poly/*/*.js'
+		'node_modules/curl/**/*.js',
+		'node_modules/poly/**/*.js'
 	],
 	libs: [
 		'test/curl-config.js',
