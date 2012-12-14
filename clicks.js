@@ -235,14 +235,20 @@ define(function (require) {
 	}
 
 	/**
-	 * Returns to a prestine state. Removes all event listeners, transforms and
-	 * restore default buffer.
+	 * Reverts to a pristine state. Removes all event listeners, transforms and
+	 * restores the default buffer, flushing any buffered events.
 	 *
 	 * @returns clicks for api chaining
 	 */
 	function reset() {
 		detach();
-		stream = arrayBuffer;
+		if ('flush' in stream) {
+			stream.flush();
+		}
+		if (stream !== arrayBuffer) {
+			stream = arrayBuffer;
+			stream.flush();
+		}
 		transforms.reset();
 
 		return clicks;

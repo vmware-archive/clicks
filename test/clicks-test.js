@@ -126,7 +126,7 @@
 				assert.same('click', events[1].type);
 			},
 			'should allow custom transformers': function () {
-				var events, altNodeTransformer;
+				var event0, event1, altNodeTransformer;
 
 				altNodeTransformer = function (node) {
 					return node ? node.nodeName : '';
@@ -135,14 +135,16 @@
 				clicks.attach();
 				clicks.transformer('node', altNodeTransformer);
 				fireEvent('click', 'MouseEvent', doc.body);
+				event0 = clicks()[0];
+
 				clicks.reset();
 				clicks.attach();
 				fireEvent('click', 'MouseEvent', doc.body);
+				event1 = clicks()[0];
 
-				events = clicks();
-				assert.same(2, events.length);
-				assert.same('BODY', events[0].target);
-				refute.same('BODY', events[1].target);
+				refute.same(event0, event1);
+				assert.same('BODY', event0.target);
+				refute.same('BODY', event1.target);
 			},
 			'should allow custom buffers': function () {
 				var buffer, event;

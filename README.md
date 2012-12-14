@@ -135,6 +135,8 @@ Change Log
 ----------
 
 .next
+- Captures History API events
+- clicks.reset() will now flush the stream buffer
 - Bower installable, with dependencies
 
 0.1.0
