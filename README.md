@@ -134,6 +134,9 @@ Palo Alto, CA 94304
 Change Log
 ----------
 
+.next
+- nothing yet
+
 0.1.1
 - Captures History API events
 - clicks.reset() will now flush the stream buffer
