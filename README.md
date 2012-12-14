@@ -134,7 +134,7 @@ Palo Alto, CA 94304
 Change Log
 ----------
 
-.next
+0.1.1
 - Captures History API events
 - clicks.reset() will now flush the stream buffer
 - Bower installable, with dependencies
