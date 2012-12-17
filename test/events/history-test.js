@@ -33,15 +33,18 @@
 	supports = {
 		popstate: 'onpopstate' in window,
 		hashchange: 'onhashchange' in window,
+		pageshow: 'onpageshow' in window,
+		pagehide: 'onpagehide' in window,
 		pushState: !!(window.history && window.history.pushState)
 	};
 
 	define('clicks/events/history-test', function (require) {
 
-		var clicks, history, origLocation;
+		var clicks, history, fireEvent, origLocation;
 
 		clicks = require('clicks');
 		history = require('clicks/events/history');
+		fireEvent = require('clicks/test/fireEvent');
 
 		buster.testCase('clicks/events/history', {
 			setUp: function () {
@@ -51,7 +54,6 @@
 				window.location = origLocation.split('#')[0] + '#';
 				setTimeout(function () {
 					clicks.reset();
-					clicks();
 					done();
 				}, 0);
 			},
@@ -110,6 +112,33 @@
 						done();
 					}, 200); // these events can serriously lag sometimes...
 				}
+			},
+			'//should fire pageshow and pagehide events': {
+				requiresSupportFor: {
+					pageshow: supports.pageshow,
+					pagehide: supports.pagehide
+				},
+				'': function (done) {
+					// TODO capturing requires full page navigation, which destroys the test context...
+				}
+			},
+			'should fire synthetic history events': function () {
+				var popstate, hashchange, pageshow, pagehide, events;
+
+				clicks.attach(history.types);
+
+				// more specific event interfaces result in DOM errors
+				popstate = fireEvent('popstate', 'CustomEvent', window); // 'PopStateEvent'
+				hashchange = fireEvent('hashchange', 'CustomEvent', window); // 'HashChangeEvent'
+				pageshow = fireEvent('pageshow', 'CustomEvent', window); // 'PageTransitionEvent'
+				pagehide = fireEvent('pagehide', 'CustomEvent', window); // 'PageTransitionEvent'
+
+				events = clicks();
+
+				assert.same(popstate.type, events[0].type);
+				assert.same(hashchange.type, events[1].type);
+				assert.same(pageshow.type, events[2].type);
+				assert.same(pagehide.type, events[3].type);
 			}
 		});
 

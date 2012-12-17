@@ -135,6 +135,7 @@ Change Log
 ----------
 
 .next
+- 'pageshow' and 'pagehide' history events 
 - vendor prefix shim that adds support for capturing prefixed events
 - added dependency on cujojs/meld
 

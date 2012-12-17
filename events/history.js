@@ -46,6 +46,12 @@ define(function (require) {
 	HashChangeEvent.prototype = dom3.properties.event;
 	prop.hashChange = new HashChangeEvent();
 
+	function PageTransitionEvent() {
+		this.persisted = '';
+	}
+	PageTransitionEvent.prototype = dom3.properties.event;
+	prop.pageTransition = new PageTransitionEvent();
+
 	events.categories = cat = {
 		history: {
 			popstate: {
@@ -55,6 +61,14 @@ define(function (require) {
 			hashchange: {
 				attachPoint: 'window',
 				properties: utils.beget(prop.hashChange)
+			},
+			pageshow: {
+				attachPoint: 'window',
+				properties: utils.beget(prop.pageTransition)
+			},
+			pagehide: {
+				attachPoint: 'window',
+				properties: utils.beget(prop.pageTransition)
 			}
 		}
 	};
