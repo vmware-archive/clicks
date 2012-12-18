@@ -143,13 +143,19 @@ define(function (require) {
 		return window.document.documentElement;
 	}
 
+	/**
+	 * @private internal use only
+	 */
 	function listen(type, config) {
-		unlisten(type);
+		clicks._unlisten(type);
 
 		config = config || {};
 		listeners[type] = on(resolveNode(config.attachPoint), type, eventCallback(config, type));
 	}
 
+	/**
+	 * @private internal use only
+	 */
 	function unlisten(type) {
 		if (type in listeners) {
 			listeners[type].call();
@@ -170,11 +176,11 @@ define(function (require) {
 		// default to dom3
 		types = types || dom3.types;
 		if (arguments.length > 1) {
-			listen.apply(undef, arguments);
+			clicks._listen.apply(undef, arguments);
 		}
 		else {
 			for (type in types) {
-				listen(type, types[type]);
+				clicks._listen(type, types[type]);
 			}
 		}
 
@@ -194,11 +200,11 @@ define(function (require) {
 		// default to all listeners
 		types = types || listeners;
 		if (Object.prototype.toString.call(types) === '[object String]') {
-			unlisten(types);
+			clicks._unlisten(types);
 		}
 		else {
 			for (type in types) {
-				unlisten(type);
+				clicks._unlisten(type);
 			}
 		}
 
@@ -264,6 +270,9 @@ define(function (require) {
 	clicks.transformer = transformer;
 	clicks.stream = setStream;
 	clicks.reset = reset;
+
+	clicks._listen = listen;
+	clicks._unlisten = unlisten;
 
 	return clicks;
 
