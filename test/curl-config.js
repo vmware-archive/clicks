@@ -26,6 +26,7 @@
 		packages: [
 			{ name: 'clicks', location: './', main: 'clicks' },
 			{ name: 'curl', location: 'node_modules/curl/src/curl', main: 'curl' },
+			{ name: 'meld', location: 'node_modules/meld', main: 'meld' },
 			{ name: 'poly', location: 'node_modules/poly', main: 'poly' }
 		],
 		preloads: ['poly']

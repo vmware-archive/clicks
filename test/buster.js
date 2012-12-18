@@ -34,6 +34,7 @@ config['clicks:browser'] = {
 		'streams/**/*.js',
 		'transforms/**/*.js',
 		'node_modules/curl/**/*.js',
+		'node_modules/meld/**/*.js',
 		'node_modules/poly/**/*.js'
 	],
 	libs: [

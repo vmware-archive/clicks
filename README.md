@@ -135,7 +135,8 @@ Change Log
 ----------
 
 .next
-- nothing yet
+- vendor prefix shim that adds support for capturing prefixed events
+- added dependency on cujojs/meld
 
 0.1.1
 - Captures History API events
