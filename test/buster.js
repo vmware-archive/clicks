@@ -32,6 +32,7 @@ config['clicks:browser'] = {
 		'*.json',
 		'events/**/*.js',
 		'streams/**/*.js',
+		'test/**/*.js',
 		'transforms/**/*.js',
 		'node_modules/curl/**/*.js',
 		'node_modules/meld/**/*.js',

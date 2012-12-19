@@ -32,36 +32,12 @@
 
 	define('clicks/events/shims/vendorPrefix-test', function (require) {
 
-		var vendorPrefix, clicks, dom3;
+		var vendorPrefix, clicks, dom3, fireEvent;
 
 		vendorPrefix = require('clicks/events/shims/vendorPrefix');
 		clicks = require('clicks');
 		dom3 = require('clicks/events/dom3');
-
-		function fireEvent(type, eventInterface, target, bubbles, cancelable) {
-			if (arguments.length <= 3) {
-				bubbles = true;
-				cancelable = true;
-			}
-
-			var e;
-
-			if (doc.createEvent) {
-				e = doc.createEvent(eventInterface);
-				e.initEvent(type, bubbles, cancelable);
-				target.dispatchEvent(e);
-			}
-			else if (target.fireEvent) {
-				e = doc.createEventObject();
-				e.target = target;
-				target.fireEvent('on' + type, e);
-			}
-			else {
-				throw new Error('Unable to fire an event');
-			}
-
-			return e;
-		}
+		fireEvent = require('clicks/test/fireEvent');
 
 		buster.testCase('clicks/events/shims/vendorPrefix', {
 			setUp: function () {

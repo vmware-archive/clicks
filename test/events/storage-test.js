@@ -30,61 +30,28 @@
 
 	doc = window.document;
 
-	supports = {
-		syntheticEvents: ('dispatchEvent' in window) || ('fireEvent' in window)
-	};
-
-	function fireEvent(type, eventInterface, target, bubbles, cancelable) {
-		if (arguments.length <= 3) {
-			bubbles = true;
-			cancelable = true;
-		}
-
-		var e;
-
-		if (doc.createEvent) {
-			e = doc.createEvent(eventInterface);
-			e.initEvent(type, bubbles, cancelable);
-			target.dispatchEvent(e);
-		}
-		else if (target.fireEvent) {
-			e = doc.createEventObject();
-			e.target = target;
-			target.fireEvent('on' + type, e);
-		}
-		else {
-			throw new Error('Unable to fire an event');
-		}
-
-		return e;
-	}
-
 	define('clicks/events/storage-test', function (require) {
 
-		var clicks, storage;
+		var clicks, storage, fireEvent;
 
 		clicks = require('clicks');
 		storage = require('clicks/events/storage');
+		fireEvent = require('clicks/test/fireEvent');
 
 		buster.testCase('clicks/events/storage', {
 			tearDown: function () {
 				clicks.reset();
 			},
 
-			'should fire synthetic storage events': {
-				requiresSupportFor: {
-					syntheticEvents: supports.syntheticEvents
-				},
-				'': function () {
-					var events;
+			'should fire synthetic storage events': function () {
+				var events;
 
-					clicks.attach(storage.types);
-					fireEvent('storage', 'StorageEvent', window);
+				clicks.attach(storage.types);
+				fireEvent('storage', 'StorageEvent', window);
 
-					events = clicks();
-					assert.same(1, events.length);
-					assert.same('storage', events[0].type);
-				}
+				events = clicks();
+				assert.same(1, events.length);
+				assert.same('storage', events[0].type);
 			},
 			'//should fire trusted storage events': function () {
 				var events;

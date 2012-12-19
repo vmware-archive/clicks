@@ -30,34 +30,12 @@
 
 	doc = window.document;
 
-	function fireEvent(type, eventInterface, target, bubbles, cancelable) {
-		if (arguments.length <= 3) {
-			bubbles = true;
-			cancelable = true;
-		}
-
-		var e;
-
-		if (doc.createEvent) {
-			e = doc.createEvent(eventInterface);
-			e.initEvent(type, bubbles, cancelable);
-			target.dispatchEvent(e);
-		}
-		else if (target.fireEvent) {
-			e = doc.createEventObject();
-			e.target = target;
-			target.fireEvent('on' + type, e);
-		}
-		else {
-			throw new Error('Unable to fire an event');
-		}
-
-		return e;
-	}
-
 	define('clicks-test', function (require) {
 
-		var clicks = require('clicks');
+		var clicks, fireEvent;
+
+		clicks = require('clicks');
+		fireEvent = require('clicks/test/fireEvent');
 
 		buster.testCase('clicks', {
 			tearDown: function () {
