@@ -43,15 +43,20 @@
 				clicks.reset();
 			},
 
-			'should fire synthetic storage events': function () {
-				var events;
+			'should fire synthetic storage events': {
+				requiresSupportFor: {
+					canFireWindowEvents: fireEvent.canFireWindowEvents
+				},
+				'': function () {
+					var events;
 
-				clicks.attach(storage.types);
-				fireEvent('storage', 'StorageEvent', window);
+					clicks.attach(storage.types);
+					fireEvent('storage', 'StorageEvent', window);
 
-				events = clicks();
-				assert.same(1, events.length);
-				assert.same('storage', events[0].type);
+					events = clicks();
+					assert.same(1, events.length);
+					assert.same('storage', events[0].type);
+				}
 			},
 			'//should fire trusted storage events': function () {
 				var events;

@@ -75,7 +75,13 @@
 						assert.same('hashchange', events[0].type);
 						if ('oldURL' in events[0]) {
 							// not supported in IE
-							assert.same(origLocation, events[0].oldURL);
+							if (origLocation === events[0].oldURL + '#') {
+								// opera strips off the hash if otherwise empty, annoying
+								assert.same(origLocation, events[0].oldURL + '#');
+							}
+							else {
+								assert.same(origLocation, events[0].oldURL);
+							}
 							assert.same(tempLocation, events[0].newURL);
 						}
 
@@ -122,23 +128,28 @@
 					// TODO capturing requires full page navigation, which destroys the test context...
 				}
 			},
-			'should fire synthetic history events': function () {
-				var popstate, hashchange, pageshow, pagehide, events;
+			'should fire synthetic history events': {
+				requiresSupportFor: {
+					canFireWindowEvents: fireEvent.canFireWindowEvents
+				},
+				'': function () {
+					var popstate, hashchange, pageshow, pagehide, events;
 
-				clicks.attach(history.types);
+					clicks.attach(history.types);
 
-				// more specific event interfaces result in DOM errors
-				popstate = fireEvent('popstate', 'CustomEvent', window); // 'PopStateEvent'
-				hashchange = fireEvent('hashchange', 'CustomEvent', window); // 'HashChangeEvent'
-				pageshow = fireEvent('pageshow', 'CustomEvent', window); // 'PageTransitionEvent'
-				pagehide = fireEvent('pagehide', 'CustomEvent', window); // 'PageTransitionEvent'
+					// more specific event interfaces result in DOM errors
+					popstate = fireEvent('popstate', 'CustomEvent', window); // 'PopStateEvent'
+					hashchange = fireEvent('hashchange', 'CustomEvent', window); // 'HashChangeEvent'
+					pageshow = fireEvent('pageshow', 'CustomEvent', window); // 'PageTransitionEvent'
+					pagehide = fireEvent('pagehide', 'CustomEvent', window); // 'PageTransitionEvent'
 
-				events = clicks();
+					events = clicks();
 
-				assert.same(popstate.type, events[0].type);
-				assert.same(hashchange.type, events[1].type);
-				assert.same(pageshow.type, events[2].type);
-				assert.same(pagehide.type, events[3].type);
+					assert.same(popstate.type, events[0].type);
+					assert.same(hashchange.type, events[1].type);
+					assert.same(pageshow.type, events[2].type);
+					assert.same(pagehide.type, events[3].type);
+				}
 			}
 		});
 

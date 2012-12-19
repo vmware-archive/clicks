@@ -47,6 +47,9 @@
 				vendorPrefix.remove();
 				clicks.reset();
 			},
+			requiresSupportFor: {
+				vendorPrefix: vendorPrefix.vendor
+			},
 
 			'should detect browser vender': function () {
 				var vendor;

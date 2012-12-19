@@ -61,6 +61,13 @@ define(function (require) {
 		return e;
 	}
 
+	/**
+	 * @returns {boolean} true if synthetic events can be fired on the window. Older IE is unable to do so.
+	 */
+	fireEvent.canFireWindowEvents = function canFireWindowEvents() {
+		return !!(window.dispatchEvent || window.fireEvent);
+	};
+
 	return fireEvent;
 
 });
