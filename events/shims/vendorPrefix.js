@@ -40,9 +40,9 @@
 define(function (require) {
 	"use strict";
 
-	var clicks, meld, vendor, loaded, attachAdvice, detachAdvice;
+	var privileged, meld, vendor, loaded, attachAdvice, detachAdvice;
 
-	clicks = require('../../clicks');
+	privileged = require('../../_privileged');
 	meld = require('meld');
 
 	loaded = false;
@@ -79,8 +79,8 @@ define(function (require) {
 	function load() {
 		if (loaded) { return; }
 
-		attachAdvice = meld.around(clicks, '_listen', advice);
-		detachAdvice = meld.around(clicks, '_unlisten', advice);
+		attachAdvice = meld.around(privileged, 'listen', advice);
+		detachAdvice = meld.around(privileged, 'unlisten', advice);
 
 		loaded = true;
 	}

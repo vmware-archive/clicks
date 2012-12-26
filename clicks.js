@@ -23,144 +23,15 @@
 define(function (require) {
 	"use strict";
 
-	var dom3, transforms, arrayBuffer,
-		listeners, stream, timeStampMin, timeStampMax, undef;
+	var privileged, undef;
 
-	dom3 = require('./events/dom3');
-	transforms = require('./transforms/_registry');
-	arrayBuffer = require('./streams/arrayBuffer');
-
-	function get() {
-		if (!('get' in stream)) {
-			return undef;
-		}
-		var events = stream.get();
-		if ('flush' in stream) {
-			stream.flush();
-		}
-		return events;
-	}
+	privileged = require('./_privileged');
 
 	/**
 	 * Obtains the contents of the stream.  Flushing the stream if possible.
 	 */
 	function clicks() {
-		return get.apply(undef, arguments);
-	}
-
-	function findTransform(property) {
-		if (typeof property === 'function') {
-			return property;
-		}
-		return transforms.lookup(property);
-	}
-
-	function eventCallback(config, type) {
-		var properties = config.properties;
-
-		return function (e) {
-			var safe, prop, transform;
-
-			safe = {};
-			for (prop in e) {
-				if (prop in properties) {
-					// transform properties whose values are likely to mutate
-					// or not serialization friendly
-					transform = findTransform(properties[prop]);
-					if (transform) {
-						safe[prop] = transform.call(undef, e[prop]);
-					}
-				}
-			}
-
-			if ('_postTransform' in properties) {
-				properties._postTransform(safe, e);
-			}
-
-			if (!('type' in safe)) {
-				// include type if missing
-				safe.type = type;
-			}
-			if (!('timeStamp' in safe) || safe.timeStamp > timeStampMax || safe.timeStamp < timeStampMin) {
-				// timeStamp is such a disaster in Firefox, the only thing we can do it set it ourselves
-				safe.timeStamp = new Date().getTime();
-			}
-
-			stream(safe);
-		};
-	}
-
-	function on(node, event, callback) {
-		var off;
-
-		if (node.addEventListener) {
-			node.addEventListener(event, callback, true);
-		}
-		else if (node.attachEvent) {
-			node.attachEvent('on' + event, callback);
-		}
-		else {
-			throw new Error("Unable to attach to node: " + node);
-		}
-
-		off = function () {
-			if (off) {
-				if (node.removeEventListener) {
-					node.removeEventListener(event, callback, true);
-				}
-				else if (node.detachEvent) {
-					node.detachEvent('on' + event, callback);
-				}
-				off = undef;
-			}
-		};
-
-		return off;
-
-	}
-
-	function resolveNode(node) {
-		// TODO use a query selector?
-		if (typeof node === 'object' && 'nodeName' in node && 'nodeType' in node) {
-			// already a DOM node
-			return node;
-		}
-		else if (node === 'window') {
-			return window;
-		}
-		else if (node === 'document') {
-			return window.document;
-		}
-		else if (node === 'html') {
-			return window.document.documentElement;
-		}
-		else if (node === 'body') {
-			return window.document.body;
-		}
-		else if (node === 'head') {
-			return window.document.head;
-		}
-		return window.document.documentElement;
-	}
-
-	/**
-	 * @private internal use only
-	 */
-	function listen(type, config) {
-		clicks._unlisten(type);
-
-		config = config || {};
-		listeners[type] = on(resolveNode(config.attachPoint), type, eventCallback(config, type));
-	}
-
-	/**
-	 * @private internal use only
-	 */
-	function unlisten(type) {
-		if (type in listeners) {
-			listeners[type].call();
-			delete listeners[type];
-		}
+		return privileged.get.apply(privileged, arguments);
 	}
 
 	/**
@@ -170,22 +41,10 @@ define(function (require) {
 	 * @param types the events to listen for
 	 * @returns clicks for api chaining
 	 */
-	function attach(types) {
-		var type;
-
-		// default to dom3
-		types = types || dom3.types;
-		if (arguments.length > 1) {
-			clicks._listen.apply(undef, arguments);
-		}
-		else {
-			for (type in types) {
-				clicks._listen(type, types[type]);
-			}
-		}
-
+	clicks.attach = function attach() {
+		privileged.attach.apply(privileged, arguments);
 		return clicks;
-	}
+	};
 
 	/**
 	 * Remove listeners for the provided event types. Defaults to all listeners
@@ -194,22 +53,10 @@ define(function (require) {
 	 * @param types the events to stop listening for
 	 * @returns clicks for api chaining
 	 */
-	function detach(types) {
-		var type;
-
-		// default to all listeners
-		types = types || listeners;
-		if (Object.prototype.toString.call(types) === '[object String]') {
-			clicks._unlisten(types);
-		}
-		else {
-			for (type in types) {
-				clicks._unlisten(type);
-			}
-		}
-
+	clicks.detach = function detach() {
+		privileged.detach.apply(privileged, arguments);
 		return clicks;
-	}
+	};
 
 	/**
 	 * Provides a transformer to use for the property type
@@ -218,15 +65,10 @@ define(function (require) {
 	 * @param transform the transform function
 	 * @returns clicks for api chaining
 	 */
-	function transformer(name, transform) {
-		if (typeof transform !== 'function') {
-			throw new Error('Function expected for transform');
-		}
-
-		transforms.register(name, transform);
-
+	clicks.transformer = function transformer() {
+		privileged.transformer.apply(privileged, arguments);
 		return clicks;
-	}
+	};
 
 	/**
 	 * Specifies the stream to publish stream events
@@ -234,11 +76,10 @@ define(function (require) {
 	 * @param {Function} func the stream receiver
 	 * @returns clicks for api chaining
 	 */
-	function setStream(func) {
-		stream = func;
-
+	clicks.stream = function stream() {
+		privileged.setStream.apply(privileged, arguments);
 		return clicks;
-	}
+	};
 
 	/**
 	 * Reverts to a pristine state. Removes all event listeners, transforms and
@@ -246,33 +87,10 @@ define(function (require) {
 	 *
 	 * @returns clicks for api chaining
 	 */
-	function reset() {
-		detach();
-		if ('flush' in stream) {
-			stream.flush();
-		}
-		if (stream !== arrayBuffer) {
-			stream = arrayBuffer;
-			stream.flush();
-		}
-		transforms.reset();
-
+	clicks.reset = function reset() {
+		privileged.reset.apply(privileged, arguments);
 		return clicks;
-	}
-
-	listeners = {};
-	stream = arrayBuffer;
-	timeStampMin = new Date().getTime() * 0.9;
-	timeStampMax = new Date().getTime() * 1.5;
-
-	clicks.attach = attach;
-	clicks.detach = detach;
-	clicks.transformer = transformer;
-	clicks.stream = setStream;
-	clicks.reset = reset;
-
-	clicks._listen = listen;
-	clicks._unlisten = unlisten;
+	};
 
 	return clicks;
 
