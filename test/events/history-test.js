@@ -21,9 +21,9 @@
  */
 
 (function (buster, define) {
-	"use strict";
+	'use strict';
 
-	var doc, assert, refute, supports, undef;
+	var doc, assert, refute, supports;
 
 	assert = buster.assert;
 	refute = buster.refute;
@@ -95,7 +95,7 @@
 					pushState: supports.pushState
 				},
 				'': function (done) {
-					var state0, state1, title, url;
+					var state0, state1;
 
 					clicks.attach({ popstate: history.types.popstate });
 
@@ -124,7 +124,7 @@
 					pageshow: supports.pageshow,
 					pagehide: supports.pagehide
 				},
-				'': function (done) {
+				'': function () {
 					// TODO capturing requires full page navigation, which destroys the test context...
 				}
 			},

@@ -20,8 +20,8 @@
  * IN THE SOFTWARE.
  */
 
-define(function (require) {
-	"use strict";
+define(function (/* require */) {
+	'use strict';
 
 	var trim, whitespaceRE, undef;
 
@@ -56,11 +56,9 @@ define(function (require) {
 				if (node.id) {
 					nodeStr += '#' + node.id;
 				}
-				if (node.classList) {
+				if (node.classList && node.classList.length > 0) {
 					// classList is more friendly, but not widely supported
-					if (node.classList.length > 0) {
-						nodeStr += '.' + Array.prototype.slice.call(node.classList).sort().join('.');
-					}
+					nodeStr += '.' + Array.prototype.slice.call(node.classList).sort().join('.');
 				}
 				else if (node.className) {
 					nodeStr += '.' + trim.apply(node.className).split(whitespaceRE).sort().join('.');

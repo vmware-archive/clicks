@@ -20,8 +20,8 @@
  * IN THE SOFTWARE.
  */
 
-define(function (require) {
-	"use strict";
+define(function (/* require */) {
+	'use strict';
 
 	var buffer = [];
 

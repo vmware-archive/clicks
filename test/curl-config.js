@@ -21,6 +21,7 @@
  */
 
 (function (g) {
+	'use strict';
 
 	g.curl = {
 		packages: [

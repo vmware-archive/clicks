@@ -21,7 +21,7 @@
  */
 
 define(function (require) {
-	"use strict";
+	'use strict';
 
 	// implemented to http://www.w3.org/TR/2011/CR-touch-events-20111215/
 	// gestures to https://developer.apple.com/library/safari/#documentation/UserExperience/Reference/GestureEventClassReference/GestureEvent/GestureEvent.html#//apple_ref/javascript/cl/GestureEvent

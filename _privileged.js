@@ -21,7 +21,7 @@
  */
 
 define(function (require) {
-	"use strict";
+	'use strict';
 
 	var internal, dom3, transforms, arrayBuffer, undef;
 
@@ -61,9 +61,7 @@ define(function (require) {
 						// transform properties whose values are likely to mutate
 						// or not serialization friendly
 						transform = this.findTransform(properties[prop]);
-						if (transform) {
-							safe[prop] = transform.call(undef, e[prop]);
-						}
+						safe[prop] = transform.call(undef, e[prop]);
 					}
 				}
 
@@ -94,7 +92,7 @@ define(function (require) {
 				node.attachEvent('on' + event, callback);
 			}
 			else {
-				throw new Error("Unable to attach to node: " + node);
+				throw new Error('Unable to attach to node: ' + node);
 			}
 
 			off = function () {
@@ -160,6 +158,7 @@ define(function (require) {
 			}
 			else {
 				for (type in types) {
+					/*jshint forin:false */
 					this.listen(type, types[type]);
 				}
 			}
@@ -175,6 +174,7 @@ define(function (require) {
 			}
 			else {
 				for (type in types) {
+					/*jshint forin:false */
 					this.unlisten(type);
 				}
 			}

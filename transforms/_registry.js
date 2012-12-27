@@ -20,8 +20,8 @@
  * IN THE SOFTWARE.
  */
 
-define(function (require) {
-	"use strict";
+define(function (/* require */) {
+	'use strict';
 
 	var transforms, providedTransforms, undef;
 
@@ -59,7 +59,7 @@ define(function (require) {
 	function registerProvided(name, func) {
 		if (name in providedTransforms) {
 			// cannot override a default
-			throw new Error("'" + name + "' is already registered as a provided transform");
+			throw new Error('\'' + name + '\' is already registered as a provided transform');
 		}
 		providedTransforms[name] = func;
 	}

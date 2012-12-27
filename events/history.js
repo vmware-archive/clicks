@@ -21,7 +21,7 @@
  */
 
 define(function (require) {
-	"use strict";
+	'use strict';
 
 	// implemented to http://www.w3.org/TR/2012/WD-html5-20121025/history.html#event-definitions-0
 

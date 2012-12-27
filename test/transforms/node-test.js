@@ -21,9 +21,9 @@
  */
 
 (function (buster, define) {
-	"use strict";
+	'use strict';
 
-	var doc, assert, refute, undef;
+	var doc, assert, refute;
 
 	assert = buster.assert;
 	refute = buster.refute;
@@ -43,7 +43,7 @@
 				head = doc.createElement('head');
 				body = doc.createElement('body');
 				// class whitespace ugliness is part of the test
-				body.innerHTML = "<div class=' foo  bar '><ul id='list'><li id='item' class='the-item'>text</li></ul></div>";
+				body.innerHTML = '<div class=" foo  bar "><ul id="list"><li id="item" class="the-item">text</li></ul></div>';
 				html.appendChild(head);
 				html.appendChild(body);
 				fragment.appendChild(html);

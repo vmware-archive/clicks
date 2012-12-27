@@ -21,9 +21,9 @@
  */
 
 define(function (require) {
-	"use strict";
+	'use strict';
 
-	var privileged, undef;
+	var privileged;
 
 	privileged = require('./_privileged');
 
@@ -31,7 +31,7 @@ define(function (require) {
 	 * Obtains the contents of the stream.  Flushing the stream if possible.
 	 */
 	function clicks() {
-		return privileged.get.apply(privileged, arguments);
+		return privileged.get();
 	}
 
 	/**
@@ -42,7 +42,7 @@ define(function (require) {
 	 * @returns clicks for api chaining
 	 */
 	clicks.attach = function attach(types) {
-		privileged.attach.apply(privileged, arguments);
+		privileged.attach(types);
 		return clicks;
 	};
 
@@ -54,7 +54,7 @@ define(function (require) {
 	 * @returns clicks for api chaining
 	 */
 	clicks.detach = function detach(types) {
-		privileged.detach.apply(privileged, arguments);
+		privileged.detach(types);
 		return clicks;
 	};
 
@@ -69,7 +69,7 @@ define(function (require) {
 		if (typeof transform !== 'function') {
 			throw new Error('Function expected for transform');
 		}
-		privileged.transformer.apply(privileged, arguments);
+		privileged.transformer(name, transform);
 		return clicks;
 	};
 
@@ -91,7 +91,7 @@ define(function (require) {
 	 * @returns clicks for api chaining
 	 */
 	clicks.reset = function reset() {
-		privileged.reset.apply(privileged, arguments);
+		privileged.reset();
 		return clicks;
 	};
 

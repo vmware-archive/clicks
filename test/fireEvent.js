@@ -20,10 +20,8 @@
  * IN THE SOFTWARE.
  */
 
-define(function (require) {
-	"use strict";
-
-	var undef;
+define(function (/* require */) {
+	'use strict';
 
 	/**
 	 * Fire a synthetic, non-trusted, event.

@@ -21,9 +21,9 @@
  */
 
 define(function (require) {
-	"use strict";
+	'use strict';
 
-	var transforms, undef;
+	var transforms;
 
 	transforms = require('./_registry');
 

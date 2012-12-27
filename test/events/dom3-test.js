@@ -21,9 +21,9 @@
  */
 
 (function (buster, define) {
-	"use strict";
+	'use strict';
 
-	var indexOf, assert, refute, supports, undef;
+	var indexOf, assert, refute, supports;
 
 	assert = buster.assert;
 	refute = buster.refute;
@@ -55,6 +55,7 @@
 				var category, type;
 
 				for (category in dom3.categories) {
+					/*jshint forin:false */
 					for (type in dom3.categories[category]) {
 						assert.same(dom3.types[type], dom3.categories[category][type]);
 					}
@@ -79,9 +80,10 @@
 			'should have a known attachPoint for every event type': function () {
 				var type, attachPoints;
 
-				attachPoints = ['window', 'document', 'html', 'head', 'body'];
+				attachPoints = ['window', 'document', 'html', 'body'];
 
 				for (type in dom3.types) {
+					/*jshint forin:false */
 					assert(indexOf.call(attachPoints, dom3.types[type].attachPoint) >= 0);
 				}
 			},
@@ -104,6 +106,7 @@
 					];
 
 					for (type in dom3.types) {
+						/*jshint forin:false */
 						assert(indexOf.call(propertySets, Object.getPrototypeOf(dom3.types[type].properties)) >= 0);
 					}
 				}
@@ -112,6 +115,7 @@
 				var type, prop;
 
 				for (type in dom3.types) {
+					/*jshint forin:false */
 					for (prop in dom3.types[type].properties) {
 						refute(dom3.types[type].properties.hasOwnProperty(prop));
 					}

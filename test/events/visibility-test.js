@@ -21,9 +21,9 @@
  */
 
 (function (buster, define) {
-	"use strict";
+	'use strict';
 
-	var assert, refute, supports, undef;
+	var assert, refute, supports;
 
 	assert = buster.assert;
 	refute = buster.refute;
@@ -49,7 +49,7 @@
 				requiresSupportFor: {
 					visibilitychange: supports.visibilitychange
 				},
-				'': function (done) {
+				'': function () {
 					// TODO capturing requires interacting with the window which we can't easily script
 				}
 			},

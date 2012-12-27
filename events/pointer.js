@@ -21,7 +21,7 @@
  */
 
 define(function (require) {
-	"use strict";
+	'use strict';
 
 	// implemented to http://www.w3.org/Submission/2012/SUBM-pointer-events-20120907/
 	// this is an early stage draft, clicks support will evolve along with the spec

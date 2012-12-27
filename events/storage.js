@@ -21,7 +21,7 @@
  */
 
 define(function (require) {
-	"use strict";
+	'use strict';
 
 	// implemented to http://www.w3.org/TR/2011/CR-webstorage-20111208/
 

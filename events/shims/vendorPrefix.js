@@ -38,7 +38,7 @@
  * fire should be negligible.
  */
 define(function (require) {
-	"use strict";
+	'use strict';
 
 	var privileged, meld, vendor, loaded, attachAdvice, detachAdvice;
 
@@ -47,12 +47,13 @@ define(function (require) {
 
 	loaded = false;
 	vendor = (function sniffVendorPrefix() {
-		var vendors, g, v, global, vendor;
+		var vendors, v, g, vendor;
 		vendors = ['ms', 'moz', 'opera', 'webkit'];
 		for (v in vendors) {
+			/*jshint forin:false */
 			vendor = vendors[v];
-			for (global in window) {
-				if (global.indexOf(vendor) === 0) {
+			for (g in window) {
+				if (g.indexOf(vendor) === 0) {
 					// sniffing for 'o' will have false positives...
 					return vendor === 'opera' ? 'o' : vendor;
 				}

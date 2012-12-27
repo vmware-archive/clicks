@@ -21,8 +21,9 @@
  */
 
 (function (buster, define) {
+	'use strict';
 
-	var assert, refute, undef;
+	var assert, refute;
 
 	assert = buster.assert;
 	refute = buster.refute;
@@ -47,14 +48,4 @@
 
 	});
 
-}(
-	this.buster || require('buster'),
-	typeof define === 'function' && define.amd ? define : function (id, factory) {
-		var packageName = id.split(/[\/\-]/)[0], pathToRoot = id.replace(/[^\/]+/g, '..');
-		pathToRoot = pathToRoot.length > 2 ? pathToRoot.substr(3) : pathToRoot;
-		factory(function (moduleId) {
-			return require(moduleId.indexOf(packageName) === 0 ? pathToRoot + moduleId.substr(packageName.length) : moduleId);
-		});
-	}
-	// Boilerplate for AMD and Node
-));
+}(this.buster, define));

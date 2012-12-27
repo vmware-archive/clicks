@@ -21,11 +21,11 @@
  */
 
 define(function (require) {
-	"use strict";
+	'use strict';
 
 	// implemented to http://www.w3.org/TR/2012/CR-page-visibility-20120726/#sec-visibilitychange-event
 
-	var dom3, utils, events, prop, cat, types;
+	var dom3, utils, events, cat, types;
 
 	dom3 = require('./dom3');
 	utils = require('../utils');

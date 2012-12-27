@@ -21,7 +21,7 @@
  */
 
 (function (buster, define) {
-	"use strict";
+	'use strict';
 
 	var doc, assert, refute, supports, undef;
 
@@ -35,10 +35,8 @@
 		sessionStorage: 'sessionStorage' in window,
 		comparableStorage: function (type) {
 			try {
-				if (window[type] === window[type]) {
-					// should always be true, but throws in IE 8
-				}
-				return true;
+				// throws in IE 8
+				return window[type] === window[type];
 			}
 			catch (e) {
 				return false;

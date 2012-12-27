@@ -21,7 +21,7 @@
  */
 
 define(function (require) {
-	"use strict";
+	'use strict';
 
 	// implemented to http://www.w3.org/TR/2012/WD-DOM-Level-3-Events-20120614/
 
