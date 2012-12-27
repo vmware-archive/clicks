@@ -180,17 +180,7 @@ define(function (require) {
 			}
 		},
 
-		transformer: function transformer(name, transform) {
-			if (typeof transform !== 'function') {
-				throw new Error('Function expected for transform');
-			}
-
-			transforms.register(name, transform);
-		},
-
-		setStream: function setStream(func) {
-			this.stream = func;
-		},
+		transformer: transforms.register,
 
 		reset: function reset() {
 			this.detach();

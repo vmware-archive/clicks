@@ -41,7 +41,7 @@ define(function (require) {
 	 * @param types the events to listen for
 	 * @returns clicks for api chaining
 	 */
-	clicks.attach = function attach() {
+	clicks.attach = function attach(types) {
 		privileged.attach.apply(privileged, arguments);
 		return clicks;
 	};
@@ -53,7 +53,7 @@ define(function (require) {
 	 * @param types the events to stop listening for
 	 * @returns clicks for api chaining
 	 */
-	clicks.detach = function detach() {
+	clicks.detach = function detach(types) {
 		privileged.detach.apply(privileged, arguments);
 		return clicks;
 	};
@@ -65,7 +65,10 @@ define(function (require) {
 	 * @param transform the transform function
 	 * @returns clicks for api chaining
 	 */
-	clicks.transformer = function transformer() {
+	clicks.transformer = function transformer(name, transform) {
+		if (typeof transform !== 'function') {
+			throw new Error('Function expected for transform');
+		}
 		privileged.transformer.apply(privileged, arguments);
 		return clicks;
 	};
@@ -76,8 +79,8 @@ define(function (require) {
 	 * @param {Function} func the stream receiver
 	 * @returns clicks for api chaining
 	 */
-	clicks.stream = function stream() {
-		privileged.setStream.apply(privileged, arguments);
+	clicks.stream = function stream(func) {
+		privileged.stream = func;
 		return clicks;
 	};
 
