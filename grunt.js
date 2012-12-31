@@ -20,9 +20,6 @@
  * IN THE SOFTWARE.
  */
 
-var fs = require('fs'),
-	json5 = require('json5');
-
 module.exports = function (grunt) {
 	'use strict';
 
@@ -35,17 +32,10 @@ module.exports = function (grunt) {
 				reporter: 'specification',
 				color: 'none'
 			}
-		},
-		lint: {
-			files: ['*.js', 'test/**/*.js', 'transforms/**/*.js', 'events/**/*.js', 'streams/**/*.js']
-		},
-		jshint: {
-			// hack until proper .jshintrc detection is working in grunt
-			options: json5.parse('' + fs.readFileSync('.jshintrc'))
 		}
 	});
 
 	// Default task.
-	grunt.registerTask('default', 'lint buster');
+	grunt.registerTask('default', 'buster');
 
 };

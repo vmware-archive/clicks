@@ -32,11 +32,11 @@
 		"buster": "",
 		"grunt": "",
 		"grunt-buster": "",
-		"json5": "0.1.0"
+		"jshint": ""
 	},
 	"main": "./clicks",
 	"scripts": {
-		"test": "grunt --no-color",
+		"test": "jshint . && grunt --no-color",
 		"start": "buster static"
 	}
 }
