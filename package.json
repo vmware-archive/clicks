@@ -29,14 +29,20 @@
 	"devDependencies": {
 		"curl": "https://github.com/cujojs/curl/tarball/0.7.2",
 		"poly": "https://github.com/cujojs/poly/tarball/0.5.1",
+		"rest": "~0.8",
+		"when": "~1",
 		"buster": "",
+		"buster-static": "https://github.com/scothis/buster-static/tarball/html5",
 		"grunt": "",
 		"grunt-buster": "",
-		"jshint": ""
+		"jshint": "",
+		"sauce-connect-launcher": "",
+		"wd": ""
 	},
 	"main": "./clicks",
 	"scripts": {
 		"test": "jshint . && grunt --no-color",
+		"ci": "npm test && node test/sauce-driver.js",
 		"start": "buster static"
 	}
 }
