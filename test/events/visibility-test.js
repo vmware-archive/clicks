@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 VMware, Inc. All Rights Reserved.
+ * Copyright (c) 2012-2013 VMware, Inc. All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -53,17 +53,22 @@
 					// TODO capturing requires interacting with the window which we can't easily script
 				}
 			},
-			'should fire synthetic visibility events': function () {
-				var visibilitychange, events;
+			'should fire synthetic visibility events': {
+				requiresSupportFor: {
+					visibilitychange: supports.visibilitychange
+				},
+				'': function () {
+					var visibilitychange, events;
 
-				clicks.attach(visibility.types);
+					clicks.attach(visibility.types);
 
-				// more specific event interfaces result in DOM errors
-				visibilitychange = fireEvent('visibilitychange', 'Event', window.document);
+					// more specific event interfaces result in DOM errors
+					visibilitychange = fireEvent('visibilitychange', 'Event', window.document);
 
-				events = clicks();
+					events = clicks();
 
-				assert.same(visibilitychange.type, events[0].type);
+					assert.same(visibilitychange.type, events[0].type);
+				}
 			}
 		});
 

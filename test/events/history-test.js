@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 VMware, Inc. All Rights Reserved.
+ * Copyright (c) 2012-2013 VMware, Inc. All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -130,7 +130,8 @@
 			},
 			'should fire synthetic history events': {
 				requiresSupportFor: {
-					canFireWindowEvents: fireEvent.canFireWindowEvents
+					windowEvents: fireEvent.canFireWindowEvents,
+					customEvents: fireEvent.canFireCustomEvents
 				},
 				'': function () {
 					var popstate, hashchange, pageshow, pagehide, events;

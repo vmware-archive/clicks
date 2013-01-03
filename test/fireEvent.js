@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 VMware, Inc. All Rights Reserved.
+ * Copyright (c) 2012-2013 VMware, Inc. All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -64,6 +64,19 @@ define(function (/* require */) {
 	 */
 	fireEvent.canFireWindowEvents = function canFireWindowEvents() {
 		return !!(window.dispatchEvent || window.fireEvent);
+	};
+
+	/**
+	 * @returns {boolean} true if custom events can be created and fired. Older IE and FF are unable to do so.
+	 */
+	fireEvent.canFireCustomEvents = function canFireCustomEvents() {
+		try {
+			fireEvent('foobar', 'CustomEvent', window.document.body);
+			return true;
+		}
+		catch (e) {
+			return false;
+		}
 	};
 
 	return fireEvent;

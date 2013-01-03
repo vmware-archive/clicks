@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 VMware, Inc. All Rights Reserved.
+ * Copyright (c) 2012-2013 VMware, Inc. All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -45,13 +45,14 @@
 
 			'should fire synthetic storage events': {
 				requiresSupportFor: {
-					canFireWindowEvents: fireEvent.canFireWindowEvents
+					windowEvents: fireEvent.canFireWindowEvents,
+					customEvents: fireEvent.canFireCustomEvents
 				},
 				'': function () {
 					var events;
 
 					clicks.attach(storage.types);
-					fireEvent('storage', 'StorageEvent', window);
+					fireEvent('storage', 'CustomEvent', window); // 'StorageEvent' results in an error
 
 					events = clicks();
 					assert.same(1, events.length);
