@@ -52,7 +52,7 @@ Supported Environments
 
 Our goal is to work in every major browser. If your preferred browser is not supported, please let us know. Some features may not be available in all environments.
 
-Historically, browsers implemented very different event models. Clicks favors using the standard `addEventListener` model, capturing events at the top of the DOM as they propagate towards the target. In order browsers, ::cough:: IE, the `attachEvent` model is used when `addEventListener` is not available.  Events in the `attachEvent` cannot be captured as they enter the DOM, and instead bubble up from the target node. If an event is squelched, or modified, before it retches the top levels of the DOM, it will not be captured.  Sorry, there isn't much we can do...
+Historically, browsers implemented very different event models. Clicks favors using the standard `addEventListener` model, capturing events at the top of the DOM as they propagate towards the target. In other browsers, ::cough:: IE, the `attachEvent` model is used when `addEventListener` is not available.  Events in the `attachEvent` cannot be captured as they enter the DOM, and instead bubble up from the target node. If an event is squelched, or modified, before it retches the top levels of the DOM, it will not be captured.  Sorry, there isn't much we can do...
 
 Tested browsers:
 - Chrome (stable)
