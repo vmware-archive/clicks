@@ -167,7 +167,12 @@
 	buster = launchBuster(8080);
 
 	console.log('Opening tunnel to Sauce Labs');
-	sauceConnect({ username: username, accessKey: accessKey }, function (err, tunnel) {
+	sauceConnect({ username: username, accessKey: accessKey, 'no_progress': true }, function (err, tunnel) {
+
+		if (err) {
+			console.error('Sauce connect error: ', err);
+			return;
+		}
 
 		var browser, tasks;
 
