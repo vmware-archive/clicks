@@ -1,9 +1,11 @@
+---
 language: node_js
 node_js:
-  - 0.8
-script: "npm run-script ci"
+- 0.8
+script: npm run-script ci
 env:
   global:
-    - SELENIUM_HOST=ondemand.saucelabs.com
-    - SELENIUM_PORT=80
-    - secure: "ChIFaeodhCRF+eqwnki/uHXYBrkd+3k4uiu21pj7i0fxQGUnEtTfVnPbbIWr\nfVJwK4vIPJl5iuKYbhzMJNN3NnxTw610U7s2FEcHZ1gV5T5spxc0kr86/MIG\n3yNkpX2HIvPPkp/SqGTIE3qpM2u9tk3GrAuGm8Bx1o1n3JfVrYo="
+  - SELENIUM_HOST=ondemand.saucelabs.com
+  - SELENIUM_PORT=80
+  - SELENIUM_USERNAME=s2js-clicks
+  - secure: "URg/4cymm504pNGkjW2/p4FOvgoUR6p/sd9fAOaY2XINQDbi750420dr7m0J\nMlyEx5PkDdTAPD3jvMt1wd/7mRQYzbv43Yt2hdtwjQtD1lDx7BvcJ54IRghn\nY+Qf2QoDc0DQLK/DTdMdO9yWsmIh4erXpMvJgeUIRf0AJFURSNM="
