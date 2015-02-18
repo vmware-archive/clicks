@@ -2,7 +2,7 @@
 	"name": "clicks",
 	"version": "0.1.1",
 	"description": "Browser click streams",
-	"keywords": ["click", "steam", "clickstream", "s2js", "spring", "springsource"],
+	"keywords": ["click", "stream", "clickstream", "s2js", "spring", "springsource"],
 	"licenses": [
 		{
 			"type": "MIT",
