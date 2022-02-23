@@ -1,3 +1,5 @@
+# clicks is no longer actively maintained by VMware, Inc.
+
 Clicks.js
 =========
 
